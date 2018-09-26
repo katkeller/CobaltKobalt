@@ -2,7 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCharacter : MonoBehaviour {
+public class PlayerCharacter : MonoBehaviour
+{
+    [SerializeField] //to expose a private int, only effects the one right under
+    private int playerLives = 3;
+
+    [SerializeField]
+    private string playerName = "Steve";
 
 	// Use this for initialization
 	void Start ()
