@@ -17,6 +17,8 @@ public class PlayerCharacter : MonoBehaviour
     private bool isOnGround;
 
     private Rigidbody2D myRigidBody2D;
+
+    private float horizontalInput;
     
 
 	// Use this for initialization
@@ -32,16 +34,22 @@ public class PlayerCharacter : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (Input.GetKey(KeyCode.LeftArrow)) //GetKeyDown is just for the first time you hit it, GetKey lets you hold the key down
+        GetInput();
+        Move();
+        /*if (Input.GetButton("Jump")) //GetKeyDown is just for the first time you hit it, GetKey lets you hold the key down, GetButton is cross-platform and better. Jump is the name of the button in Unity in the input manager.
         {
-            MoveLeft();
-        }
+            Move();
+        }*/
         
         //transform.Translate(0, -.01f, 0); //don't use, does not use physics. RigedBody does.
     }
-
-    private void MoveLeft()
+    private void GetInput()
     {
-        myRigidBody2D.velocity = new Vector2(-5, 0);
+        horizontalInput = Input.GetAxis("Horizontal");
+    }
+
+    private void Move()
+    {
+        myRigidBody2D.velocity = new Vector2(horizontalInput, 0);
     }
 }
