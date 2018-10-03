@@ -6,6 +6,8 @@ public class PlayerCharacterTwo : MonoBehaviour
 {
     [SerializeField]
     private Rigidbody2D rb2d;
+    [SerializeField]
+    private float speed = 5;
 
     private float horizontalInput;
 	
@@ -13,10 +15,14 @@ public class PlayerCharacterTwo : MonoBehaviour
     {
 		
 	}
-	
-	void Update ()
+
+    void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
+    }
 
+    void FixedUpdate ()
+    {
+        rb2d.AddForce(Vector2.right * horizontalInput * speed);
 	}
 }
