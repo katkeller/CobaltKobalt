@@ -331,8 +331,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb2d: {fileID: 233597018}
-  accelerationForce: 25
+  accelerationForce: 30
   maxSpeed: 5
+  jumpForce: 10
 --- !u!1 &413652922
 GameObject:
   m_ObjectHideFlags: 0
