@@ -322,6 +322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb2d: {fileID: 233597018}
+  playerGroundCollider: {fileID: 233597019}
   playerMovingPhysicsMaterial: {fileID: 6200000, guid: ec77be40bb860594c9e4bbcbd16c959f,
     type: 2}
   playerStoppingPhysicsMaterial: {fileID: 6200000, guid: 638e2c44e13f31a4e8412ca0cecb98d4,
