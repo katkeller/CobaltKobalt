@@ -8,6 +8,9 @@ public class PlayerCharacterTwo : MonoBehaviour
     private Rigidbody2D rb2d;
 
     [SerializeField]
+    private PhysicsMaterial2D playerMovingPhysicsMaterial, playerStoppingPhysicsMaterial;
+
+    [SerializeField]
     private Collider2D groundDetectTrigger;
 
     [SerializeField]
