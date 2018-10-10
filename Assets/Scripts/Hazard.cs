@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Hazard : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Hazard : MonoBehaviour
         if(collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player entered Hazard");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         else
         {
