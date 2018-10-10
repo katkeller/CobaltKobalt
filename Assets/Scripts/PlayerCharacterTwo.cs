@@ -62,7 +62,7 @@ public class PlayerCharacterTwo : MonoBehaviour
 
     private void UpdateHorizontalInput()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
+        horizontalInput = Input.GetAxisRaw("Horizontal");
     }
 
     private void HandleJumpInput()
