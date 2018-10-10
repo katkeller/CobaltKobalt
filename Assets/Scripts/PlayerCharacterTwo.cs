@@ -8,6 +8,9 @@ public class PlayerCharacterTwo : MonoBehaviour
     private Rigidbody2D rb2d;
 
     [SerializeField]
+    private Collider2D playerGroundCollider;
+
+    [SerializeField]
     private PhysicsMaterial2D playerMovingPhysicsMaterial, playerStoppingPhysicsMaterial;
 
     [SerializeField]
@@ -35,6 +38,22 @@ public class PlayerCharacterTwo : MonoBehaviour
         UpdateHorizontalInput();
         HandleJumpInput();
     }
+    void FixedUpdate ()
+    {
+        UpdatePhysicsMaterial();
+        Move();
+    }
+    private void UpdatePhysicsMaterial()
+    {
+        if (Mathf.Abs(horizontalInput) > 0)
+        {
+            playerGroundCollider.sharedMaterial = playerMovingPhysicsMaterial;
+        }
+        else
+        {
+            playerGroundCollider.sharedMaterial = playerStoppingPhysicsMaterial;
+        }
+    }
     private void UpdateIsOnGround()
     {
         isOnGround = groundDetectTrigger.OverlapCollider(groundContactFilter, groundHitDetectionResults) > 0;
@@ -52,11 +71,6 @@ public class PlayerCharacterTwo : MonoBehaviour
         {
             rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
-    }
-
-    void FixedUpdate ()
-    {
-        Move();
     }
 
     private void Move()
