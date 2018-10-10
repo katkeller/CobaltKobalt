@@ -4,80 +4,52 @@ using UnityEngine;
 
 public class PlayerCharacterTwo : MonoBehaviour
 {
-    [SerializeField]
-    private Rigidbody2D rb2d;
+    [SerializeField] //to expose a private value, only effects the one right under, or multiple seperated by comma on same line.
+    private int playerLives = 3;
 
     [SerializeField]
-    private Collider2D playerGroundCollider;
+    private string playerName = "Steve";
 
-    [SerializeField]
-    private PhysicsMaterial2D playerMovingPhysicsMaterial, playerStoppingPhysicsMaterial;
 
-    [SerializeField]
-    private Collider2D groundDetectTrigger;
+    private float jumpHeight = 1, speed = 5;
 
-    [SerializeField]
-    private float accelerationForce = 5;
+    private bool hasKey; //bools must be named as yes/no questions, i.e. "hasKey" not "key."
+    private bool isOnGround;
 
-    [SerializeField]
-    private float maxSpeed = 20;
-
-    [SerializeField]
-    private float jumpForce = 10;
-
-    [SerializeField]
-    private ContactFilter2D groundContactFilter;
+    private Rigidbody2D myRigidBody2D;
 
     private float horizontalInput;
-    private bool isOnGround;
-    private Collider2D[] groundHitDetectionResults = new Collider2D[16];
 
+
+    // Use this for initialization
+    void Start()
+    {
+        myRigidBody2D = GetComponent<Rigidbody2D>(); //Searches for datatype in game and puts it in the variable so it's not a null reference. Variable must be initialized.
+                                                     /*string pizza = "yum";
+                                                     Debug.Log(pizza); //how you print to the console in unity*/
+
+        myRigidBody2D.gravityScale = 2;
+    }
+
+    // Update is called once per frame
     void Update()
     {
-        UpdateIsOnGround();
-        UpdateHorizontalInput();
-        HandleJumpInput();
-    }
-    void FixedUpdate ()
-    {
-        UpdatePhysicsMaterial();
+        GetInput();
         Move();
-    }
-    private void UpdatePhysicsMaterial()
-    {
-        if (Mathf.Abs(horizontalInput) > 0)
+        /*if (Input.GetButton("Jump")) //GetKeyDown is just for the first time you hit it, GetKey lets you hold the key down, GetButton is cross-platform and better. Jump is the name of the button in Unity in the input manager.
         {
-            playerGroundCollider.sharedMaterial = playerMovingPhysicsMaterial;
-        }
-        else
-        {
-            playerGroundCollider.sharedMaterial = playerStoppingPhysicsMaterial;
-        }
-    }
-    private void UpdateIsOnGround()
-    {
-        isOnGround = groundDetectTrigger.OverlapCollider(groundContactFilter, groundHitDetectionResults) > 0;
-        Debug.Log("IsOnGround?: " + isOnGround);
-    }
+            Move();
+        }*/
 
-    private void UpdateHorizontalInput()
-    {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
+        //transform.Translate(0, -.01f, 0); //don't use, does not use physics. RigedBody does.
     }
-
-    private void HandleJumpInput()
+    private void GetInput()
     {
-        if (Input.GetButtonDown("Jump") && isOnGround)
-        {
-            rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        }
+        horizontalInput = Input.GetAxis("Horizontal");
     }
 
     private void Move()
     {
-        rb2d.AddForce(Vector2.right * horizontalInput * accelerationForce);
-        Vector2 clampedVelocity = rb2d.velocity;
-        clampedVelocity.x = Mathf.Clamp(rb2d.velocity.x, -maxSpeed, maxSpeed);
-        rb2d.velocity = clampedVelocity;
+        myRigidBody2D.velocity = new Vector2(horizontalInput, 0);
     }
 }

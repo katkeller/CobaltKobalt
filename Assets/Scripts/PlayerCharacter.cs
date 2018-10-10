@@ -1,55 +1,101 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCharacter : MonoBehaviour
 {
-    [SerializeField] //to expose a private value, only effects the one right under, or multiple seperated by comma on same line.
-    private int playerLives = 3;
+    [SerializeField]
+    private Rigidbody2D rb2d;
 
     [SerializeField]
-    private string playerName = "Steve";
+    private Collider2D playerGroundCollider;
 
+    [SerializeField]
+    private PhysicsMaterial2D playerMovingPhysicsMaterial, playerStoppingPhysicsMaterial;
 
-    private float jumpHeight = 1, speed = 5;
+    [SerializeField]
+    private Collider2D groundDetectTrigger;
 
-    private bool hasKey; //bools must be named as yes/no questions, i.e. "hasKey" not "key."
-    private bool isOnGround;
+    [SerializeField]
+    private float accelerationForce = 5;
 
-    private Rigidbody2D myRigidBody2D;
+    [SerializeField]
+    private float maxSpeed = 20;
+
+    [SerializeField]
+    private float jumpForce = 10;
+
+    [SerializeField]
+    private ContactFilter2D groundContactFilter;
 
     private float horizontalInput;
-    
+    private bool isOnGround;
+    private Collider2D[] groundHitDetectionResults = new Collider2D[16];
+    private Checkpoint currentCheckpoint;
 
-	// Use this for initialization
-	void Start ()
+    void Update()
     {
-        myRigidBody2D = GetComponent<Rigidbody2D>(); //Searches for datatype in game and puts it in the variable so it's not a null reference. Variable must be initialized.
-        /*string pizza = "yum";
-        Debug.Log(pizza); //how you print to the console in unity*/
-
-        myRigidBody2D.gravityScale = 2;
-	}
-	
-	// Update is called once per frame
-	void Update ()
+        UpdateIsOnGround();
+        UpdateHorizontalInput();
+        HandleJumpInput();
+    }
+    void FixedUpdate()
     {
-        GetInput();
+        UpdatePhysicsMaterial();
         Move();
-        /*if (Input.GetButton("Jump")) //GetKeyDown is just for the first time you hit it, GetKey lets you hold the key down, GetButton is cross-platform and better. Jump is the name of the button in Unity in the input manager.
-        {
-            Move();
-        }*/
-        
-        //transform.Translate(0, -.01f, 0); //don't use, does not use physics. RigedBody does.
     }
-    private void GetInput()
+    private void UpdatePhysicsMaterial()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
+        if (Mathf.Abs(horizontalInput) > 0)
+        {
+            playerGroundCollider.sharedMaterial = playerMovingPhysicsMaterial;
+        }
+        else
+        {
+            playerGroundCollider.sharedMaterial = playerStoppingPhysicsMaterial;
+        }
+    }
+    private void UpdateIsOnGround()
+    {
+        isOnGround = groundDetectTrigger.OverlapCollider(groundContactFilter, groundHitDetectionResults) > 0;
+        Debug.Log("IsOnGround?: " + isOnGround);
     }
 
+    private void UpdateHorizontalInput()
+    {
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+    }
+    private void HandleJumpInput()
+    {
+        if (Input.GetButtonDown("Jump") && isOnGround)
+        {
+            rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
+    }
     private void Move()
     {
-        myRigidBody2D.velocity = new Vector2(horizontalInput, 0);
+        rb2d.AddForce(Vector2.right * horizontalInput * accelerationForce);
+        Vector2 clampedVelocity = rb2d.velocity;
+        clampedVelocity.x = Mathf.Clamp(rb2d.velocity.x, -maxSpeed, maxSpeed);
+        rb2d.velocity = clampedVelocity;
+    }
+
+    public void Respawn()
+    {
+        if (currentCheckpoint == null)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        else
+        {
+            rb2d.velocity = Vector2.zero;
+            transform.position = currentCheckpoint.transform.position;
+        }
+    }
+    public void SetCurrentCheckpoint(Checkpoint newCurrentCheckpoint)
+    {
+        currentCheckpoint = newCurrentCheckpoint;
     }
 }
+
