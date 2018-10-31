@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Door : MonoBehaviour
 {
+    [SerializeField]
+    private string sceneToLoad;
+
     private bool isPlayerInTrigger;
 
     //private void OnTriggerStay2D(Collider2D collision)
@@ -38,6 +42,7 @@ public class Door : MonoBehaviour
         if (Input.GetButtonDown("Activate") && isPlayerInTrigger)
         {
             Debug.Log("Player activated door!");
+            SceneManager.LoadScene(sceneToLoad);
         }
     }
 }
