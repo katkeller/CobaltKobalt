@@ -14,12 +14,13 @@ public class Checkpoint : MonoBehaviour
     private Color inactivatedColor, activatedColor;
 
     private SpriteRenderer spriteRenderer;
-
+    private AudioSource audioSource;
     private bool isActivated;
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
         UpdateColor();
     }
 
@@ -73,6 +74,7 @@ public class Checkpoint : MonoBehaviour
             Debug.Log("Player entered checkpoint");
             PlayerCharacter player = collision.GetComponent<PlayerCharacter>();
             player.SetCurrentCheckpoint(this);
+            audioSource.Play();
         }
     }
 }
