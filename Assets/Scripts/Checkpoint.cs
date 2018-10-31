@@ -10,7 +10,17 @@ public class Checkpoint : MonoBehaviour
     [SerializeField]
     private float inactivatedScale = 1, activatedScale = 1.5f;
 
+    [SerializeField]
+    private Color inactivatedColor, activatedColor;
+
+    private SpriteRenderer spriteRenderer;
+
     private bool isActivated;
+
+    private void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     private void Update()
     {
@@ -37,10 +47,22 @@ public class Checkpoint : MonoBehaviour
         transform.localScale = Vector3.one * scale;
     }
 
+    private void UpdateColor()
+    {
+        Color color = inactivatedColor;
+
+        if (isActivated)
+        {
+            color = activatedColor;
+        }
+        spriteRenderer.color = color;
+    }
+
     public void SetIsActivated(bool value)
     {
         isActivated = value;
         UpdateScale();
+        UpdateColor();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
