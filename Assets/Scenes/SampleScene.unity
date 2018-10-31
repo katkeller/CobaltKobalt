@@ -1594,26 +1594,6 @@ Prefab:
       propertyPath: m_Name
       value: Checkpoint (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 114887030341299322, guid: 6bf4a01ed03c047429916489e95d1549,
-        type: 2}
-      propertyPath: inactivatedColor.r
-      value: 0.9921569
-      objectReference: {fileID: 0}
-    - target: {fileID: 114887030341299322, guid: 6bf4a01ed03c047429916489e95d1549,
-        type: 2}
-      propertyPath: inactivatedColor.g
-      value: 0.5921569
-      objectReference: {fileID: 0}
-    - target: {fileID: 114887030341299322, guid: 6bf4a01ed03c047429916489e95d1549,
-        type: 2}
-      propertyPath: inactivatedColor.b
-      value: 0.9450981
-      objectReference: {fileID: 0}
-    - target: {fileID: 114887030341299322, guid: 6bf4a01ed03c047429916489e95d1549,
-        type: 2}
-      propertyPath: inactivatedColor.a
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6bf4a01ed03c047429916489e95d1549, type: 2}
   m_IsPrefabParent: 0

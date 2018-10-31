@@ -20,6 +20,7 @@ public class Checkpoint : MonoBehaviour
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        UpdateColor();
     }
 
     private void Update()
