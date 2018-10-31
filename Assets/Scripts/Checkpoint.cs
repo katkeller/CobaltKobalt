@@ -24,6 +24,11 @@ public class Checkpoint : MonoBehaviour
         transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
     }
 
+    public void SetIsActivated(bool value)
+    {
+        isActivated = value;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
