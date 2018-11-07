@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 171222633}
   - component: {fileID: 171222632}
   m_Layer: 5
-  m_Name: Image
+  m_Name: MailWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.88235295}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -406,27 +406,27 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4155806625833878, guid: 58dba5109c9c18c469b95e02b3dae817, type: 2}
       propertyPath: m_LocalScale.x
-      value: 0.33
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 58324272366835560, guid: 58dba5109c9c18c469b95e02b3dae817,
         type: 2}
       propertyPath: m_Radius
-      value: 0.75
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 212073702434025080, guid: 58dba5109c9c18c469b95e02b3dae817,
         type: 2}
       propertyPath: m_Color.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 212073702434025080, guid: 58dba5109c9c18c469b95e02b3dae817,
         type: 2}
       propertyPath: m_Color.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 212073702434025080, guid: 58dba5109c9c18c469b95e02b3dae817,
         type: 2}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114718249175577676, guid: 58dba5109c9c18c469b95e02b3dae817,
         type: 2}
@@ -441,12 +441,12 @@ Prefab:
         type: 3}
     - target: {fileID: 4155806625833878, guid: 58dba5109c9c18c469b95e02b3dae817, type: 2}
       propertyPath: m_LocalScale.y
-      value: 0.33
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 61978504004695892, guid: 58dba5109c9c18c469b95e02b3dae817,
         type: 2}
       propertyPath: m_Offset.x
-      value: 1.22
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 61978504004695892, guid: 58dba5109c9c18c469b95e02b3dae817,
         type: 2}
@@ -456,22 +456,22 @@ Prefab:
     - target: {fileID: 61978504004695892, guid: 58dba5109c9c18c469b95e02b3dae817,
         type: 2}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 2.4
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 61978504004695892, guid: 58dba5109c9c18c469b95e02b3dae817,
         type: 2}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 3.6
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 61978504004695892, guid: 58dba5109c9c18c469b95e02b3dae817,
         type: 2}
       propertyPath: m_Size.x
-      value: 1.72
+      value: 0.58
       objectReference: {fileID: 0}
     - target: {fileID: 61978504004695892, guid: 58dba5109c9c18c469b95e02b3dae817,
         type: 2}
       propertyPath: m_Size.y
-      value: 3.53
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 61978504004695892, guid: 58dba5109c9c18c469b95e02b3dae817,
         type: 2}
@@ -481,12 +481,12 @@ Prefab:
     - target: {fileID: 58324272366835560, guid: 58dba5109c9c18c469b95e02b3dae817,
         type: 2}
       propertyPath: m_Offset.x
-      value: 1.21
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 58324272366835560, guid: 58dba5109c9c18c469b95e02b3dae817,
         type: 2}
       propertyPath: m_Offset.y
-      value: -1.44
+      value: -0.57
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 58dba5109c9c18c469b95e02b3dae817, type: 2}
