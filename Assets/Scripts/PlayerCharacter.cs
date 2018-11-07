@@ -34,6 +34,12 @@ public class PlayerCharacter : MonoBehaviour
     private Collider2D[] groundHitDetectionResults = new Collider2D[16];
     private Checkpoint currentCheckpoint;
     private bool facingRight = true;
+    private Animator playerAnimator;
+
+    private void Start()
+    {
+        playerAnimator = GetComponent<Animator>();
+    }
 
     void Update()
     {
@@ -45,6 +51,8 @@ public class PlayerCharacter : MonoBehaviour
     {
         UpdatePhysicsMaterial();
         Move();
+
+        playerAnimator.SetFloat("Speed", Mathf.Abs(horizontalInput));
     }
     private void UpdatePhysicsMaterial()
     {
