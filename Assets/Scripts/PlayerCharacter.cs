@@ -35,10 +35,13 @@ public class PlayerCharacter : MonoBehaviour
     private Checkpoint currentCheckpoint;
     private bool facingRight = true;
     private Animator playerAnimator;
+    private AudioSource audioSource;
+    private bool isMoving;
 
     private void Start()
     {
         playerAnimator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -53,6 +56,11 @@ public class PlayerCharacter : MonoBehaviour
         Move();
 
         playerAnimator.SetFloat("Speed", Mathf.Abs(horizontalInput));
+
+        //do
+        //{
+        //    audioSource.Play();
+        //} while (Mathf.Abs(horizontalInput) > 0);
     }
     private void UpdatePhysicsMaterial()
     {
