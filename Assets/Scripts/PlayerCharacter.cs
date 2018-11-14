@@ -36,7 +36,7 @@ public class PlayerCharacter : MonoBehaviour
     private bool facingRight = true;
     private Animator playerAnimator;
     private AudioSource audioSource;
-    private bool isMoving;
+    //private bool isMoving;
 
     private void Start()
     {
