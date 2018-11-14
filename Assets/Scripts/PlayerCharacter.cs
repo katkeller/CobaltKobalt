@@ -17,11 +17,11 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField]
     private Collider2D groundDetectTrigger;
 
-    [SerializeField]
-    private Collider2D pickupDetectTrigger;
+    //[SerializeField]
+    //private Collider2D pickupDetectTrigger;
 
-    [SerializeField]
-    private ContactFilter2D pickupContactFilter;
+    //[SerializeField]
+    //private ContactFilter2D pickupContactFilter;
 
     [SerializeField]
     private float accelerationForce = 5;
@@ -42,7 +42,7 @@ public class PlayerCharacter : MonoBehaviour
     private bool isOnGround;
     private bool canDoubleJump;
     private Collider2D[] groundHitDetectionResults = new Collider2D[26];
-    private Collider2D[] pickupHitDetectionResults = new Collider2D[16];
+    //private Collider2D[] pickupHitDetectionResults = new Collider2D[16];
     private Checkpoint currentCheckpoint;
     private bool facingRight = true;
     private Animator playerAnimator;
@@ -58,7 +58,7 @@ public class PlayerCharacter : MonoBehaviour
     void Update()
     {
         UpdateIsOnGround();
-        UpdateCanDoubleJump();
+        //UpdateCanDoubleJump();
         UpdateHorizontalInput();
         HandleJumpInput();
     }
@@ -91,11 +91,11 @@ public class PlayerCharacter : MonoBehaviour
         Debug.Log("IsOnGround?: " + isOnGround);
     }
 
-    private void UpdateCanDoubleJump()
-    {
-        canDoubleJump = pickupDetectTrigger.OverlapCollider(pickupContactFilter, pickupHitDetectionResults) > 0;
-        Debug.Log("CanDoubleJump?: " + canDoubleJump);
-    }
+    //private void UpdateCanDoubleJump()
+    //{
+    //    canDoubleJump = pickupDetectTrigger.OverlapCollider(pickupContactFilter, pickupHitDetectionResults) > 0;
+    //    Debug.Log("CanDoubleJump?: " + canDoubleJump);
+    //}
 
     private void UpdateHorizontalInput()
     {
@@ -107,10 +107,10 @@ public class PlayerCharacter : MonoBehaviour
         {
             rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
-        //else if (Input.GetKeyDown("Shift") && canDoubleJump)
-        //{
-        //    rb2d.AddForce(Vector2.up * doubleJumpForce, ForceMode2D.Impulse);
-        //}
+        else if (Input.GetButtonDown("DoubleJump") && canDoubleJump)
+        {
+            rb2d.AddForce(Vector2.up * doubleJumpForce, ForceMode2D.Impulse);
+        }
     }
     private void Move()
     {
@@ -126,6 +126,15 @@ public class PlayerCharacter : MonoBehaviour
         else if (horizontalInput < 0 && facingRight)
         {
             Flip();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("PickUp"))
+        {
+            canDoubleJump = true;
+            Debug.Log("CanDoubleJump?: " + canDoubleJump);
         }
     }
 
