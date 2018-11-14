@@ -18,6 +18,12 @@ public class PlayerCharacter : MonoBehaviour
     private Collider2D groundDetectTrigger;
 
     [SerializeField]
+    private Collider2D pickupDetectTrigger;
+
+    [SerializeField]
+    private ContactFilter2D pickupContactFilter;
+
+    [SerializeField]
     private float accelerationForce = 5;
 
     [SerializeField]
@@ -27,11 +33,16 @@ public class PlayerCharacter : MonoBehaviour
     private float jumpForce = 10;
 
     [SerializeField]
+    private float doubleJumpForce = 15;
+
+    [SerializeField]
     private ContactFilter2D groundContactFilter;
 
     private float horizontalInput;
     private bool isOnGround;
-    private Collider2D[] groundHitDetectionResults = new Collider2D[16];
+    private bool canDoubleJump;
+    private Collider2D[] groundHitDetectionResults = new Collider2D[26];
+    private Collider2D[] pickupHitDetectionResults = new Collider2D[16];
     private Checkpoint currentCheckpoint;
     private bool facingRight = true;
     private Animator playerAnimator;
@@ -47,6 +58,7 @@ public class PlayerCharacter : MonoBehaviour
     void Update()
     {
         UpdateIsOnGround();
+        UpdateCanDoubleJump();
         UpdateHorizontalInput();
         HandleJumpInput();
     }
@@ -79,6 +91,12 @@ public class PlayerCharacter : MonoBehaviour
         Debug.Log("IsOnGround?: " + isOnGround);
     }
 
+    private void UpdateCanDoubleJump()
+    {
+        canDoubleJump = pickupDetectTrigger.OverlapCollider(pickupContactFilter, pickupHitDetectionResults) > 0;
+        Debug.Log("CanDoubleJump?: " + canDoubleJump);
+    }
+
     private void UpdateHorizontalInput()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
@@ -89,6 +107,10 @@ public class PlayerCharacter : MonoBehaviour
         {
             rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
+        //else if (Input.GetKeyDown("Shift") && canDoubleJump)
+        //{
+        //    rb2d.AddForce(Vector2.up * doubleJumpForce, ForceMode2D.Impulse);
+        //}
     }
     private void Move()
     {
