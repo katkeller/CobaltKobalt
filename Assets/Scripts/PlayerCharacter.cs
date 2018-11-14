@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -47,6 +48,7 @@ public class PlayerCharacter : MonoBehaviour
     private bool facingRight = true;
     private Animator playerAnimator;
     private AudioSource audioSource;
+    private bool audioIsPlaying;
     //private bool isMoving;
 
     private void Start()
@@ -61,7 +63,23 @@ public class PlayerCharacter : MonoBehaviour
         //UpdateCanDoubleJump();
         UpdateHorizontalInput();
         HandleJumpInput();
+        UpdateSound();
     }
+
+    private void UpdateSound()
+    {
+        if (isOnGround && !audioIsPlaying && Mathf.Abs(horizontalInput) > 0)
+        {
+            audioSource.Play();
+            audioIsPlaying = true;
+        }
+        else if (audioIsPlaying && Mathf.Abs(horizontalInput) <= 0 || !isOnGround)
+        {
+            audioSource.Pause();
+            audioIsPlaying = false;
+        }
+    }
+
     void FixedUpdate()
     {
         UpdatePhysicsMaterial();
@@ -110,7 +128,6 @@ public class PlayerCharacter : MonoBehaviour
         else if (Input.GetButtonDown("DoubleJump") && canDoubleJump)
         {
             rb2d.AddForce(Vector2.up * doubleJumpForce, ForceMode2D.Impulse);
-            audioSource.Play();
         }
     }
     private void Move()
