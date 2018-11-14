@@ -110,6 +110,7 @@ public class PlayerCharacter : MonoBehaviour
         else if (Input.GetButtonDown("DoubleJump") && canDoubleJump)
         {
             rb2d.AddForce(Vector2.up * doubleJumpForce, ForceMode2D.Impulse);
+            audioSource.Play();
         }
     }
     private void Move()
@@ -128,7 +129,6 @@ public class PlayerCharacter : MonoBehaviour
             Flip();
         }
     }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("PickUp"))
