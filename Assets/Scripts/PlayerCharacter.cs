@@ -49,6 +49,7 @@ public class PlayerCharacter : MonoBehaviour
     private Animator playerAnimator;
     private AudioSource audioSource;
     private bool audioIsPlaying;
+    private bool isDead = false;
     //private bool isMoving;
 
     private void Start()
@@ -153,6 +154,11 @@ public class PlayerCharacter : MonoBehaviour
             canDoubleJump = true;
             Debug.Log("CanDoubleJump?: " + canDoubleJump);
         }
+
+        if (other.gameObject.CompareTag("Hazard"))
+        {
+            isDead = true;
+        }
     }
 
     public void Respawn()
@@ -166,6 +172,8 @@ public class PlayerCharacter : MonoBehaviour
             rb2d.velocity = Vector2.zero;
             transform.position = currentCheckpoint.transform.position;
         }
+
+        isDead = false;
     }
     public void SetCurrentCheckpoint(Checkpoint newCurrentCheckpoint)
     {

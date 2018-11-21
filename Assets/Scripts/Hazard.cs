@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Hazard : MonoBehaviour
 {
     [SerializeField]
-    private float respawnDelay = 5.0f;
+    //private float respawnDelay = 5.0f;
 
     private AudioSource audioSource;
 
@@ -20,10 +20,11 @@ public class Hazard : MonoBehaviour
         if(collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player entered Hazard");
-            
-            StartCoroutine(DelayRespawn());
-            PlayerCharacter player = collision.GetComponent<PlayerCharacter>();
-            player.Respawn();
+
+            //StartCoroutine(DelayRespawn());
+            audioSource.Play();
+            //PlayerCharacter player = collision.GetComponent<PlayerCharacter>();
+            //player.Respawn();
         }
         else
         {
@@ -32,9 +33,9 @@ public class Hazard : MonoBehaviour
         
     }
 
-    IEnumerator DelayRespawn()
-    {
-        audioSource.Play();
-        yield return new WaitForSeconds(5);
-    }
+    //IEnumerator DelayRespawn()
+    //{
+    //    audioSource.Play();
+    //    yield return new WaitForSeconds(5);
+    //}
 }
