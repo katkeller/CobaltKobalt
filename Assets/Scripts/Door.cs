@@ -8,7 +8,12 @@ public class Door : MonoBehaviour
     [SerializeField]
     private string sceneToLoad;
 
+    [SerializeField]
+    private float RotationSpeed = 100;
+
     private bool isPlayerInTrigger;
+
+    private bool isActivated;
 
     //private void OnTriggerStay2D(Collider2D collision)
     //{
@@ -39,10 +44,16 @@ public class Door : MonoBehaviour
 
     private void Update()
     {
+        UpdateRotation();
         if (Input.GetButtonDown("Activate") && isPlayerInTrigger)
         {
             Debug.Log("Player activated door!");
             SceneManager.LoadScene(sceneToLoad);
         }
+    }
+    private void UpdateRotation()
+    {
+        float rotationSpeed = RotationSpeed;
+        transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
     }
 }
