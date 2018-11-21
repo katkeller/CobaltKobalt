@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Door : MonoBehaviour
 {
     [SerializeField]
-    private string sceneToLoad;
+    private string sceneToLoad = "SampleScene";
 
     [SerializeField]
     private float RotationSpeed = 100;
@@ -34,13 +34,13 @@ public class Door : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            isPlayerInTrigger = false;
-        }
-    }
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (collision.CompareTag("Player"))
+    //    {
+    //        isPlayerInTrigger = false;
+    //    }
+    //}
 
     private void Update()
     {
