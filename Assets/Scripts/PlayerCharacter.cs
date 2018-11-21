@@ -66,6 +66,7 @@ public class PlayerCharacter : MonoBehaviour
         UpdateHorizontalInput();
         HandleJumpInput();
         UpdateSound();
+        CheckForRespawn();
     }
 
     private void UpdateSound()
@@ -165,7 +166,17 @@ public class PlayerCharacter : MonoBehaviour
     public void Death()
     {
         isDead = true;
+        playerAnimator.SetBool("isDead", isDead);
     }
+
+    private void CheckForRespawn()
+    {
+        if (isDead && Input.GetButtonDown("Respawn"))
+        {
+            Respawn();
+        }
+    }
+
 
     public void Respawn()
     {
@@ -180,6 +191,7 @@ public class PlayerCharacter : MonoBehaviour
         }
 
         isDead = false;
+        playerAnimator.SetBool("isDead", isDead);
     }
     public void SetCurrentCheckpoint(Checkpoint newCurrentCheckpoint)
     {
