@@ -51,6 +51,7 @@ public class PlayerCharacter : MonoBehaviour
     private bool audioIsPlaying;
     private bool isDead = false;
     private bool pickUpIsActivated = false;
+    private bool canMove = true;
     //private bool isMoving;
 
     private void Start()
@@ -136,16 +137,20 @@ public class PlayerCharacter : MonoBehaviour
     }
     private void Move()
     {
-        rb2d.AddForce(Vector2.right * horizontalInput * accelerationForce);
-        Vector2 clampedVelocity = rb2d.velocity;
-        clampedVelocity.x = Mathf.Clamp(rb2d.velocity.x, -maxSpeed, maxSpeed);
-        rb2d.velocity = clampedVelocity;
+        if (canMove)
+        {
+            rb2d.AddForce(Vector2.right * horizontalInput * accelerationForce);
+            Vector2 clampedVelocity = rb2d.velocity;
+            clampedVelocity.x = Mathf.Clamp(rb2d.velocity.x, -maxSpeed, maxSpeed);
+            rb2d.velocity = clampedVelocity;
+        }
+        
 
-        if (horizontalInput > 0 && !facingRight)
+        if (horizontalInput > 0 && !facingRight && canMove)
         {
             Flip();
         }
-        else if (horizontalInput < 0 && facingRight)
+        else if (horizontalInput < 0 && facingRight && canMove)
         {
             Flip();
         }
@@ -165,6 +170,8 @@ public class PlayerCharacter : MonoBehaviour
     }
     public void Death()
     {
+        canMove = false;
+        rb2d.velocity = Vector2.zero;
         isDead = true;
         playerAnimator.SetBool("isDead", isDead);
     }
@@ -192,6 +199,7 @@ public class PlayerCharacter : MonoBehaviour
 
         isDead = false;
         playerAnimator.SetBool("isDead", isDead);
+        canMove = true;
     }
     public void SetCurrentCheckpoint(Checkpoint newCurrentCheckpoint)
     {
