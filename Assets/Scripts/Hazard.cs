@@ -23,8 +23,8 @@ public class Hazard : MonoBehaviour
 
             //StartCoroutine(DelayRespawn());
             audioSource.Play();
-            //PlayerCharacter player = collision.GetComponent<PlayerCharacter>();
-            //player.Respawn();
+            PlayerCharacter player = collision.GetComponent<PlayerCharacter>();
+            player.Death();
         }
         else
         {

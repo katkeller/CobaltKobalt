@@ -50,6 +50,7 @@ public class PlayerCharacter : MonoBehaviour
     private AudioSource audioSource;
     private bool audioIsPlaying;
     private bool isDead = false;
+    private bool pickUpIsActivated = false;
     //private bool isMoving;
 
     private void Start()
@@ -126,9 +127,10 @@ public class PlayerCharacter : MonoBehaviour
         {
             rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
-        else if (Input.GetButtonDown("DoubleJump") && canDoubleJump)
+        else if (Input.GetButtonDown("DoubleJump") && canDoubleJump && !pickUpIsActivated)
         {
             rb2d.AddForce(Vector2.up * doubleJumpForce, ForceMode2D.Impulse);
+            pickUpIsActivated = true;
         }
     }
     private void Move()
@@ -155,10 +157,14 @@ public class PlayerCharacter : MonoBehaviour
             Debug.Log("CanDoubleJump?: " + canDoubleJump);
         }
 
-        if (other.gameObject.CompareTag("Hazard"))
-        {
-            isDead = true;
-        }
+        //if (other.gameObject.CompareTag("Hazard"))
+        //{
+        //    isDead = true;
+        //}
+    }
+    public void Death()
+    {
+        isDead = true;
     }
 
     public void Respawn()
