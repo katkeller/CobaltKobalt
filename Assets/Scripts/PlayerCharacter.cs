@@ -117,11 +117,11 @@ public class PlayerCharacter : MonoBehaviour
         isOnGround = groundDetectTrigger.OverlapCollider(groundContactFilter, groundHitDetectionResults) > 0;
         Debug.Log("IsOnGround?: " + isOnGround);
         
-        if (isOnGround)
+        if (isOnGround )
         {
             playerAnimator.SetBool("isJumping", false);
         }
-        else if (!isOnGround)
+        else if (!isOnGround && !isDead)
         {
             playerAnimator.SetBool("isJumping", true);
         }
