@@ -52,6 +52,7 @@ public class PlayerCharacter : MonoBehaviour
     private bool isDead = false;
     private bool pickUpIsActivated = false;
     private bool canMove = true;
+    private bool isJumping = false;
     //private bool isMoving;
 
     private void Start()
@@ -89,7 +90,11 @@ public class PlayerCharacter : MonoBehaviour
         UpdatePhysicsMaterial();
         Move();
 
-        playerAnimator.SetFloat("Speed", Mathf.Abs(horizontalInput));
+        if (isOnGround)
+        {
+            playerAnimator.SetFloat("Speed", Mathf.Abs(horizontalInput));
+        }
+        //playerAnimator.SetFloat("Speed", Mathf.Abs(horizontalInput));
 
         //do
         //{
@@ -111,6 +116,15 @@ public class PlayerCharacter : MonoBehaviour
     {
         isOnGround = groundDetectTrigger.OverlapCollider(groundContactFilter, groundHitDetectionResults) > 0;
         Debug.Log("IsOnGround?: " + isOnGround);
+        
+        if (isOnGround)
+        {
+            playerAnimator.SetBool("isJumping", false);
+        }
+        else if (!isOnGround)
+        {
+            playerAnimator.SetBool("isJumping", true);
+        }
     }
 
     //private void UpdateCanDoubleJump()
@@ -128,6 +142,7 @@ public class PlayerCharacter : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isOnGround)
         {
             rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            
         }
         else if (Input.GetButtonDown("DoubleJump") && canDoubleJump && !pickUpIsActivated)
         {
