@@ -27,15 +27,24 @@ public class PickUps : MonoBehaviour
             audioSource.Play();
             pickUpAnimator.SetBool("isActivated", true);
             pickUpIsActivated = true;
+            canDoubleJump = false;
         }
         
 	}
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && !pickUpIsActivated)
         {
             canDoubleJump = true;
+            pickUpAnimator.SetBool("playerInTrigger", true);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") && !pickUpIsActivated)
+        {
+            canDoubleJump = false;
+            pickUpAnimator.SetBool("playerInTrigger", false);
         }
     }
 
