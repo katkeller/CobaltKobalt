@@ -10,16 +10,24 @@ public class PickUps : MonoBehaviour
 
     //private SpriteRenderer spriteRenderer;
     private AudioSource audioSource;
+    private Animator pickUpAnimator;
     //private bool isActive = false;
+    private bool canDoubleJump;
     private bool pickUpIsActivated = false;
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-
+        pickUpAnimator = GetComponent<Animator>();
     }
     void Update ()
     {
+        if (canDoubleJump && Input.GetButtonDown("DoubleJump"))
+        {
+            audioSource.Play();
+            pickUpAnimator.SetBool("isActivated", true);
+            pickUpIsActivated = true;
+        }
         
 	}
 
@@ -27,14 +35,8 @@ public class PickUps : MonoBehaviour
     {
         if (collision.CompareTag("Player") && !pickUpIsActivated)
         {
-            audioSource.Play();
-            //spriteRenderer.color = activatedColor;
+            canDoubleJump = true;
         }
-
-        //do
-        //{
-        //    spriteRenderer.sprite = activatedSprite;
-        //} while (collision.CompareTag("Player"));
     }
 
 }
