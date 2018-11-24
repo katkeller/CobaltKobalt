@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 
 public class PlayerCharacter : MonoBehaviour
 {
@@ -38,6 +40,9 @@ public class PlayerCharacter : MonoBehaviour
 
     [SerializeField]
     private ContactFilter2D groundContactFilter;
+
+    [SerializeField]
+    private Image respawnUIImage;
 
     private float horizontalInput;
     private bool isOnGround;
@@ -189,6 +194,7 @@ public class PlayerCharacter : MonoBehaviour
         rb2d.velocity = Vector2.zero;
         isDead = true;
         playerAnimator.SetBool("isDead", isDead);
+        respawnUIImage.enabled = true;
     }
 
     private void CheckForRespawn()
@@ -214,6 +220,7 @@ public class PlayerCharacter : MonoBehaviour
 
         isDead = false;
         playerAnimator.SetBool("isDead", isDead);
+        respawnUIImage.enabled = false;
         canMove = true;
     }
     public void SetCurrentCheckpoint(Checkpoint newCurrentCheckpoint)
