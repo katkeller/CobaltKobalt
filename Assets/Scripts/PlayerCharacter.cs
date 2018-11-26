@@ -20,12 +20,6 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField]
     private Collider2D groundDetectTrigger;
 
-    //[SerializeField]
-    //private Collider2D pickupDetectTrigger;
-
-    //[SerializeField]
-    //private ContactFilter2D pickupContactFilter;
-
     [SerializeField]
     private float accelerationForce = 5;
 
@@ -47,8 +41,7 @@ public class PlayerCharacter : MonoBehaviour
     private float horizontalInput;
     private bool isOnGround;
     private bool canDoubleJump;
-    private Collider2D[] groundHitDetectionResults = new Collider2D[26];
-    //private Collider2D[] pickupHitDetectionResults = new Collider2D[16];
+    private Collider2D[] groundHitDetectionResults = new Collider2D[16];
     private Checkpoint currentCheckpoint;
     private bool facingRight = true;
     private Animator playerAnimator;
@@ -58,7 +51,6 @@ public class PlayerCharacter : MonoBehaviour
     private bool pickUpIsActivated = false;
     private bool canMove = true;
     private bool isJumping = false;
-    //private bool isMoving;
 
     private void Start()
     {
@@ -69,7 +61,6 @@ public class PlayerCharacter : MonoBehaviour
     void Update()
     {
         UpdateIsOnGround();
-        //UpdateCanDoubleJump();
         UpdateHorizontalInput();
         HandleJumpInput();
         UpdateSound();
@@ -99,12 +90,6 @@ public class PlayerCharacter : MonoBehaviour
         {
             playerAnimator.SetFloat("Speed", Mathf.Abs(horizontalInput));
         }
-        //playerAnimator.SetFloat("Speed", Mathf.Abs(horizontalInput));
-
-        //do
-        //{
-        //    audioSource.Play();
-        //} while (Mathf.Abs(horizontalInput) > 0);
     }
     private void UpdatePhysicsMaterial()
     {
@@ -131,12 +116,6 @@ public class PlayerCharacter : MonoBehaviour
             playerAnimator.SetBool("isJumping", true);
         }
     }
-
-    //private void UpdateCanDoubleJump()
-    //{
-    //    canDoubleJump = pickupDetectTrigger.OverlapCollider(pickupContactFilter, pickupHitDetectionResults) > 0;
-    //    Debug.Log("CanDoubleJump?: " + canDoubleJump);
-    //}
 
     private void UpdateHorizontalInput()
     {
@@ -182,11 +161,6 @@ public class PlayerCharacter : MonoBehaviour
             canDoubleJump = true;
             Debug.Log("CanDoubleJump?: " + canDoubleJump);
         }
-
-        //if (other.gameObject.CompareTag("Hazard"))
-        //{
-        //    isDead = true;
-        //}
     }
     public void Death()
     {

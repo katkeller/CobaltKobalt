@@ -6,7 +6,6 @@ public class PickUps : MonoBehaviour
 {
     private AudioSource audioSource;
     private Animator pickUpAnimator;
-    //private bool isActive = false;
     private bool canDoubleJump;
     private bool pickUpIsActivated = false;
 
