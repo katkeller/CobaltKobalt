@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class PickUps : MonoBehaviour
 {
-    //[SerializeField]
-    //private Color inactivatedColor, activatedColor;
-
-
-    //private SpriteRenderer spriteRenderer;
     private AudioSource audioSource;
     private Animator pickUpAnimator;
     //private bool isActive = false;
