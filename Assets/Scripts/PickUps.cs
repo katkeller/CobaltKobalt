@@ -6,8 +6,18 @@ public class PickUps : MonoBehaviour
 {
     private AudioSource audioSource;
     private Animator pickUpAnimator;
-    private bool canDoubleJump;
-    private bool pickUpIsActivated = false;
+    // private bool canDoubleJump;
+
+    public bool PlayerInTrigger { get; set; }
+    public bool PickUpIsActivated { get; set; }
+
+    //public bool PickUpIsActivated
+    //{
+    //    get { return pickUpIsActivated; }
+    //    set { pickUpIsActivated = value; }
+    //}
+
+    //private bool pickUpIsActivated = false;
 
     private void Start()
     {
@@ -16,28 +26,36 @@ public class PickUps : MonoBehaviour
     }
     void Update ()
     {
-        if (canDoubleJump && Input.GetButtonDown("DoubleJump"))
+        if (PlayerInTrigger && Input.GetButtonDown("DoubleJump") && !PickUpIsActivated)
         {
             audioSource.Play();
+            //pickUpAnimator.SetBool("isActivated", true);
+            PickUpIsActivated = true;
+        }
+        
+        if (PickUpIsActivated)
+        {
             pickUpAnimator.SetBool("isActivated", true);
-            pickUpIsActivated = true;
-            canDoubleJump = false;
+        }
+        else if (!PickUpIsActivated)
+        {
+            pickUpAnimator.SetBool("isActivated", false);
         }
         
 	}
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && !pickUpIsActivated)
+        if (collision.CompareTag("Player") && !PickUpIsActivated)
         {
-            canDoubleJump = true;
+            PlayerInTrigger = true;
             pickUpAnimator.SetBool("playerInTrigger", true);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && !pickUpIsActivated)
+        if (collision.CompareTag("Player") && !PickUpIsActivated)
         {
-            canDoubleJump = false;
+            PlayerInTrigger = false;
             pickUpAnimator.SetBool("playerInTrigger", false);
         }
     }

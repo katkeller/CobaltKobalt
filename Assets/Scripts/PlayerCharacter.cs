@@ -182,6 +182,7 @@ public class PlayerCharacter : MonoBehaviour
 
     public void Respawn()
     {
+
         if (currentCheckpoint == null)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -194,6 +195,8 @@ public class PlayerCharacter : MonoBehaviour
 
         isDead = false;
         playerAnimator.SetBool("isDead", isDead);
+        PickUps pickUps = new PickUps();
+        pickUps.PickUpIsActivated = false;
         respawnUIImage.enabled = false;
         canMove = true;
     }
