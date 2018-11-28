@@ -7,6 +7,7 @@ public class PickUps : MonoBehaviour
     private AudioSource audioSource;
     private Animator pickUpAnimator;
     private bool playerIsRespawning;
+    private PlayerCharacter player;
     // private bool canDoubleJump;
 
     public bool PlayerInTrigger { get; set; }
@@ -22,7 +23,8 @@ public class PickUps : MonoBehaviour
 
     private void Start()
     {
-        PlayerCharacter player = new PlayerCharacter();
+        player = new PlayerCharacter();
+
         playerIsRespawning = player.PlayerIsRespawning;
         audioSource = GetComponent<AudioSource>();
         pickUpAnimator = GetComponent<Animator>();
