@@ -52,6 +52,8 @@ public class PlayerCharacter : MonoBehaviour
     private bool canMove = true;
     private bool isJumping = false;
 
+    public bool PlayerIsRespawning { get; set; }
+
     private void Start()
     {
         playerAnimator = GetComponent<Animator>();
@@ -182,7 +184,7 @@ public class PlayerCharacter : MonoBehaviour
 
     public void Respawn()
     {
-
+        PlayerIsRespawning = true;
         if (currentCheckpoint == null)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -195,8 +197,8 @@ public class PlayerCharacter : MonoBehaviour
 
         isDead = false;
         playerAnimator.SetBool("isDead", isDead);
-        PickUps pickUps = new PickUps();
-        pickUps.PickUpIsActivated = false;
+        //PickUps pickUps = new PickUps();
+        //pickUps.PickUpIsActivated = false;
         respawnUIImage.enabled = false;
         canMove = true;
     }

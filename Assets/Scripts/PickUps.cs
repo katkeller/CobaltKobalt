@@ -6,6 +6,7 @@ public class PickUps : MonoBehaviour
 {
     private AudioSource audioSource;
     private Animator pickUpAnimator;
+    private bool playerIsRespawning;
     // private bool canDoubleJump;
 
     public bool PlayerInTrigger { get; set; }
@@ -21,6 +22,8 @@ public class PickUps : MonoBehaviour
 
     private void Start()
     {
+        PlayerCharacter player = new PlayerCharacter();
+        playerIsRespawning = player.PlayerIsRespawning;
         audioSource = GetComponent<AudioSource>();
         pickUpAnimator = GetComponent<Animator>();
     }
@@ -40,6 +43,11 @@ public class PickUps : MonoBehaviour
         else if (!PickUpIsActivated)
         {
             pickUpAnimator.SetBool("isActivated", false);
+        }
+
+        if (playerIsRespawning)
+        {
+            Debug.Log("pickup is being reset");
         }
         
 	}

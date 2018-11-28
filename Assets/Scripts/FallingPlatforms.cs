@@ -5,7 +5,7 @@ using UnityEngine;
 public class FallingPlatforms : MonoBehaviour
 {
     [SerializeField]
-    private float countDown = 3.0f;
+    private float fallDelay = 3.0f;
 
     private Rigidbody2D rb2d;
     private AudioSource audioSource;
@@ -20,26 +20,15 @@ public class FallingPlatforms : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            countDown -= Time.deltaTime;
-            audioSource.Play();
-            if(countDown <= 0.0f)
-            {
-                rb2d.isKinematic = false;
-                Debug.Log("Platform is falling!");
-            }
-            //Fall();
             Debug.Log("Player activated falling tile!");
-            //rb2d.isKinematic = false;
+            audioSource.Play();
+            StartCoroutine(DelayFall());
         }
     }
-    //private void Fall()
-    //{
-    //    countDown -= Time.deltaTime;
 
-    //    if (countDown <= 0.0f)
-    //    {
-    //        Debug.Log("Tile is falling!");
-    //        rb2d.isKinematic = false;
-    //    }
-    //}
+    private IEnumerator DelayFall()
+    {
+        yield return new WaitForSeconds(fallDelay);
+        rb2d.isKinematic = false;
+    }
 }
