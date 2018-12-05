@@ -10,6 +10,7 @@ public class FallingPlatforms : MonoBehaviour
     private Rigidbody2D rb2d;
     private AudioSource audioSource;
     private Animator fallingPlatformAnimator;
+    private bool isTriggered = false;
 
 	void Start ()
     {
@@ -20,20 +21,14 @@ public class FallingPlatforms : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && !isTriggered)
         {
+            isTriggered = true;
             Debug.Log("Player activated falling tile!");
             audioSource.Play();
             fallingPlatformAnimator.SetTrigger("PlayerActivatedFallingPlatform");
-            //StartCoroutine(DelayFall());
         }
     }
-
-    //private IEnumerator DelayFall()
-    //{
-    //    yield return new WaitForSeconds(fallDelay);
-    //    ActivateFall();
-    //}
 
     private void ActivateFall()
     {
