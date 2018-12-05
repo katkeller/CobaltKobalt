@@ -9,11 +9,13 @@ public class FallingPlatforms : MonoBehaviour
 
     private Rigidbody2D rb2d;
     private AudioSource audioSource;
+    private Animator fallingPlatformAnimator;
 
 	void Start ()
     {
         rb2d = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
+        fallingPlatformAnimator = GetComponent<Animator>();
 	}
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -22,13 +24,19 @@ public class FallingPlatforms : MonoBehaviour
         {
             Debug.Log("Player activated falling tile!");
             audioSource.Play();
-            StartCoroutine(DelayFall());
+            fallingPlatformAnimator.SetTrigger("PlayerActivatedFallingPlatform");
+            //StartCoroutine(DelayFall());
         }
     }
 
-    private IEnumerator DelayFall()
+    //private IEnumerator DelayFall()
+    //{
+    //    yield return new WaitForSeconds(fallDelay);
+    //    ActivateFall();
+    //}
+
+    private void ActivateFall()
     {
-        yield return new WaitForSeconds(fallDelay);
         rb2d.isKinematic = false;
     }
 }
