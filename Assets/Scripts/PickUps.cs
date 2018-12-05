@@ -8,18 +8,9 @@ public class PickUps : MonoBehaviour
     private Animator pickUpAnimator;
     private bool playerIsRespawning;
     private PlayerCharacter player;
-    // private bool canDoubleJump;
 
     public bool PlayerInTrigger { get; set; }
     public bool PickUpIsActivated { get; set; }
-
-    //public bool PickUpIsActivated
-    //{
-    //    get { return pickUpIsActivated; }
-    //    set { pickUpIsActivated = value; }
-    //}
-
-    //private bool pickUpIsActivated = false;
 
     private void Start()
     {
@@ -34,7 +25,6 @@ public class PickUps : MonoBehaviour
         if (PlayerInTrigger && Input.GetButtonDown("DoubleJump") && !PickUpIsActivated)
         {
             audioSource.Play();
-            //pickUpAnimator.SetBool("isActivated", true);
             PickUpIsActivated = true;
         }
         

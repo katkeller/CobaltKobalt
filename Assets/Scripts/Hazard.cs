@@ -20,8 +20,6 @@ public class Hazard : MonoBehaviour
         if(collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player entered Hazard");
-
-            //StartCoroutine(DelayRespawn());
             audioSource.Play();
             PlayerCharacter player = collision.GetComponent<PlayerCharacter>();
             player.Death();
@@ -32,10 +30,4 @@ public class Hazard : MonoBehaviour
         }
         
     }
-
-    //IEnumerator DelayRespawn()
-    //{
-    //    audioSource.Play();
-    //    yield return new WaitForSeconds(5);
-    //}
 }

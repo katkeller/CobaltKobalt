@@ -15,17 +15,6 @@ public class Door : MonoBehaviour
 
     private bool isActivated;
 
-    //private void OnTriggerStay2D(Collider2D collision)
-    //{
-    //    if (collision.CompareTag("Player"))
-    //    {
-    //        if (Input.GetButtonDown("Activate"))
-    //        {
-    //            Debug.Log("Player activated door!");
-    //        }
-    //    }
-    //}
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -33,14 +22,6 @@ public class Door : MonoBehaviour
             isPlayerInTrigger = true;
         }
     }
-
-    //private void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    if (collision.CompareTag("Player"))
-    //    {
-    //        isPlayerInTrigger = false;
-    //    }
-    //}
 
     private void Update()
     {
