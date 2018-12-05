@@ -33,5 +33,6 @@ public class FallingPlatforms : MonoBehaviour
     private void ActivateFall()
     {
         rb2d.isKinematic = false;
+        Debug.Log("The platform should be falling...");
     }
 }
