@@ -3513,7 +3513,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4193079779767950, guid: 06449e1b3bc2cd4498964553589bc6b8, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 16.999996
+      value: 16.999998
       objectReference: {fileID: 0}
     - target: {fileID: 4193079779767950, guid: 06449e1b3bc2cd4498964553589bc6b8, type: 2}
       propertyPath: m_LocalPosition.z
@@ -3549,6 +3549,26 @@ Prefab:
       propertyPath: m_BoundingShape2D
       value: 
       objectReference: {fileID: 388895782}
+    - target: {fileID: 114193439964438650, guid: 06449e1b3bc2cd4498964553589bc6b8,
+        type: 2}
+      propertyPath: m_ScreenY
+      value: 0.4999998
+      objectReference: {fileID: 0}
+    - target: {fileID: 114193439964438650, guid: 06449e1b3bc2cd4498964553589bc6b8,
+        type: 2}
+      propertyPath: m_DeadZoneHeight
+      value: 0.23311096
+      objectReference: {fileID: 0}
+    - target: {fileID: 114193439964438650, guid: 06449e1b3bc2cd4498964553589bc6b8,
+        type: 2}
+      propertyPath: m_ScreenX
+      value: 0.49999997
+      objectReference: {fileID: 0}
+    - target: {fileID: 114193439964438650, guid: 06449e1b3bc2cd4498964553589bc6b8,
+        type: 2}
+      propertyPath: m_DeadZoneWidth
+      value: 0.18575071
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 06449e1b3bc2cd4498964553589bc6b8, type: 2}
   m_IsPrefabParent: 0
@@ -6242,7 +6262,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4131817163377180, guid: 48aa93a8df7ff8e4287cae2ae073cd41, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 11.92
+      value: 13.99
       objectReference: {fileID: 0}
     - target: {fileID: 4131817163377180, guid: 48aa93a8df7ff8e4287cae2ae073cd41, type: 2}
       propertyPath: m_LocalPosition.z
@@ -8453,7 +8473,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 6
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -8476,7 +8496,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1371328132}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 171.5, y: 16.999996, z: -11}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
