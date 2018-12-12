@@ -42,6 +42,9 @@ public class PlayerCharacter : MonoBehaviour
     private Image respawnUIImage;
     #endregion
 
+
+    public static event Action PlayerRespawned;
+
     private float horizontalInput;
     private bool isOnGround;
     private bool canDoubleJump;
@@ -111,11 +114,14 @@ public class PlayerCharacter : MonoBehaviour
         isDead = false;
         playerAnimator.SetBool("isDead", isDead);
         //FallingPlatforms fallingPlatform = new FallingPlatforms();
+       // GetComponent<FallingPlatforms>().ResetPlatforms();
         //fallingPlatform.ResetPlatforms();
         //FallingPlatforms fallingPlatforms = GetComponant<FallingPlatforms>();
         //fallingPlatforms.ResetPlatforms();
         respawnUIImage.enabled = false;
         canMove = true;
+        if (PlayerRespawned != null)
+            PlayerRespawned.Invoke();
     }
 
     private void UpdatePlayerAnimator()

@@ -47,8 +47,19 @@ public class FallingPlatforms : MonoBehaviour
     public void ResetPlatforms()
     {
         Debug.Log("Platfroms should reset");
+        gameObject.transform.position = originalPosition;
+        rb2d.velocity = Vector2.zero;
         rb2d.isKinematic = true;
         isTriggered = false;
-        gameObject.transform.position = originalPosition;
+    }
+
+    private void OnEnable()
+    {
+        PlayerCharacter.PlayerRespawned += ResetPlatforms;
+    }
+    private void OnDisable()
+    {
+        PlayerCharacter.PlayerRespawned -= ResetPlatforms;
+
     }
 }
