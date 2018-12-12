@@ -53,8 +53,6 @@ public class PickUps : MonoBehaviour
     {
         yield return new WaitForSeconds(3.0f);
         pickUpIsActivated = false;
-        pickUpAnimator.SetBool("isActivated", false);
-        pickUpAnimator.SetBool("playerInTrigger", false);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

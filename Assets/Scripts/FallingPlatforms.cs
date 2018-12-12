@@ -27,7 +27,6 @@ public class FallingPlatforms : MonoBehaviour
         if (collision.CompareTag("Player") && !isTriggered)
         {
             isTriggered = true;
-            //Debug.Log("Player activated falling tile!");
             audioSource.Play();
             fallingPlatformAnimator.SetTrigger("PlayerActivatedFallingPlatform");
             StartCoroutine(DelayFall());
@@ -43,7 +42,6 @@ public class FallingPlatforms : MonoBehaviour
     private void ActivateFall()
     {
         rb2d.isKinematic = false;
-        //Debug.Log("The platform should be falling...");
     }
 
     public void ResetPlatforms()
