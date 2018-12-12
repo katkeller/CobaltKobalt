@@ -12,7 +12,6 @@ public class Door : MonoBehaviour
     private float RotationSpeed = 100;
 
     private bool isPlayerInTrigger;
-
     private bool isActivated;
 
     private void OnTriggerEnter2D(Collider2D collision)
