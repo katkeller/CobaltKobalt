@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,11 +7,8 @@ public class PickUps : MonoBehaviour
 {
     private AudioSource audioSource;
     private Animator pickUpAnimator;
-    //private bool playerIsRespawning;
-    private PlayerCharacter player;
     private bool PlayerInTrigger;
     private bool pickUpIsActivated;
-    public bool playerIsRespawning;
 
     private void Start()
     {
@@ -23,8 +21,15 @@ public class PickUps : MonoBehaviour
         {
             audioSource.Play();
             pickUpIsActivated = true;
+            StartCoroutine(DelayPickUpReset());
+            PlayerInTrigger = false;
         }
-        
+
+        UpdateAnimation();
+	}
+
+    private void UpdateAnimation()
+    {
         if (pickUpIsActivated)
         {
             pickUpAnimator.SetBool("isActivated", true);
@@ -34,32 +39,36 @@ public class PickUps : MonoBehaviour
             pickUpAnimator.SetBool("isActivated", false);
         }
 
-        if (playerIsRespawning)
+        if (PlayerInTrigger)
         {
-            pickUpIsActivated = false;
-        }
-        
-	}
-
-    public void PlayerIsRespawing()
-    {
-        playerIsRespawning = true;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player") && !pickUpIsActivated)
-        {
-            PlayerInTrigger = true;
             pickUpAnimator.SetBool("playerInTrigger", true);
         }
+        else if (!PlayerInTrigger)
+        {
+            pickUpAnimator.SetBool("playerInTrigger", false);
+        }
     }
-    private void OnTriggerExit2D(Collider2D collision)
+
+    IEnumerator DelayPickUpReset()
     {
-        if (collision.CompareTag("Player") && !pickUpIsActivated)
+        yield return new WaitForSeconds(3.0f);
+        pickUpIsActivated = false;
+        pickUpAnimator.SetBool("isActivated", false);
+        pickUpAnimator.SetBool("playerInTrigger", false);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player") && !pickUpIsActivated)
+        {
+            PlayerInTrigger = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player") && !pickUpIsActivated)
         {
             PlayerInTrigger = false;
-            pickUpAnimator.SetBool("playerInTrigger", false);
         }
     }
 }

@@ -22,8 +22,15 @@ public class PickUpAudio : MonoBehaviour
         {
             pickUpIsActivated = true;
             audioSource.Stop();
+            StartCoroutine(DelayPickUpRest());
         }
 	}
+
+    IEnumerator DelayPickUpRest()
+    {
+        yield return new WaitForSeconds(3.0f);
+        pickUpIsActivated = false;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

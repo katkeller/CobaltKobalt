@@ -110,8 +110,10 @@ public class PlayerCharacter : MonoBehaviour
 
         isDead = false;
         playerAnimator.SetBool("isDead", isDead);
-        PickUps pickUps = new PickUps();
-        pickUps.PlayerIsRespawing();
+        //PickUps pickUps = new PickUps();
+        //pickUps.PlayerIsRespawing();
+        //FallingPlatforms fallingPlatform = new FallingPlatforms();
+        //fallingPlatform.ResetPlatforms();
         respawnUIImage.enabled = false;
         canMove = true;
     }
@@ -166,8 +168,16 @@ public class PlayerCharacter : MonoBehaviour
         {
             rb2d.AddForce(Vector2.up * doubleJumpForce, ForceMode2D.Impulse);
             pickUpIsActivated = true;
+            StartCoroutine(DelayPickUpReset());
         }
     }
+
+    IEnumerator DelayPickUpReset()
+    {
+        yield return new WaitForSeconds(3.0f);
+        pickUpIsActivated = false;
+    }
+
     private void Move()
     {
         if (canMove)
@@ -199,6 +209,14 @@ public class PlayerCharacter : MonoBehaviour
         {
             canDoubleJump = true;
             Debug.Log("CanDoubleJump?: " + canDoubleJump);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("PickUp"))
+        {
+            canDoubleJump = false;
         }
     }
 

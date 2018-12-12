@@ -11,13 +11,16 @@ public class FallingPlatforms : MonoBehaviour
     private AudioSource audioSource;
     private Animator fallingPlatformAnimator;
     private bool isTriggered = false;
+    private Vector3 originalPosition;
 
     void Start ()
     {
         rb2d = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
         fallingPlatformAnimator = GetComponent<Animator>();
-	}
+        originalPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
+
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -41,5 +44,12 @@ public class FallingPlatforms : MonoBehaviour
     {
         rb2d.isKinematic = false;
         //Debug.Log("The platform should be falling...");
+    }
+
+    public void ResetPlatforms()
+    {
+        Debug.Log("Platfroms should reset");
+        rb2d.isKinematic = true;
+        gameObject.transform.position = originalPosition;
     }
 }
