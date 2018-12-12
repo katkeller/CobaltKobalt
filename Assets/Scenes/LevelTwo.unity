@@ -4400,7 +4400,7 @@ Prefab:
     - target: {fileID: 114943484693113280, guid: 3eacbe931c2b1584a9972d6a516b4d1b,
         type: 2}
       propertyPath: m_Text
-      value: Sup, idiot.
+      value: Hey idiot.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3eacbe931c2b1584a9972d6a516b4d1b, type: 2}
