@@ -8,16 +8,19 @@ using UnityEngine.UI;
 
 public class PlayerCharacter : MonoBehaviour
 {
+    #region SerializedFields
     [SerializeField]
     private Rigidbody2D rb2d;
 
     [SerializeField]
+    [Tooltip("The collider that dictates where the player comes into contact with the ground")]
     private Collider2D playerGroundCollider;
 
     [SerializeField]
     private PhysicsMaterial2D playerMovingPhysicsMaterial, playerStoppingPhysicsMaterial;
 
     [SerializeField]
+    [Tooltip("The trigger collider that overlaps with the ground")]
     private Collider2D groundDetectTrigger;
 
     [SerializeField]
@@ -37,6 +40,7 @@ public class PlayerCharacter : MonoBehaviour
 
     [SerializeField]
     private Image respawnUIImage;
+    #endregion
 
     private float horizontalInput;
     private bool isOnGround;
@@ -65,10 +69,9 @@ public class PlayerCharacter : MonoBehaviour
         UpdateIsOnGround();
         UpdateHorizontalInput();
         HandleJumpInput();
-        UpdateSound();
         CheckForRespawn();
     }
-
+    /// <summary>UpdateSound either plays or stops the typing/footstep sound</summary>
     private void UpdateSound()
     {
         if (isOnGround && !audioIsPlaying && Mathf.Abs(horizontalInput) > 0)
@@ -87,12 +90,41 @@ public class PlayerCharacter : MonoBehaviour
     {
         UpdatePhysicsMaterial();
         Move();
+        UpdateSound();
+        UpdatePlayerAnimator();
 
+    }
+
+    public void Respawn()
+    {
+        PlayerIsRespawning = true;
+        if (currentCheckpoint == null)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        else
+        {
+            rb2d.velocity = Vector2.zero;
+            transform.position = currentCheckpoint.transform.position;
+        }
+
+        isDead = false;
+        playerAnimator.SetBool("isDead", isDead);
+        PickUps pickUps = new PickUps();
+        pickUps.PlayerIsRespawing();
+        respawnUIImage.enabled = false;
+        canMove = true;
+    }
+
+    private void UpdatePlayerAnimator()
+    {
         if (isOnGround)
         {
             playerAnimator.SetFloat("Speed", Mathf.Abs(horizontalInput));
         }
     }
+
+    /// <summary>This method keeps the player from sliding around or being too slow to speed up due to physics materials</summary>
     private void UpdatePhysicsMaterial()
     {
         if (Mathf.Abs(horizontalInput) > 0)
@@ -145,8 +177,12 @@ public class PlayerCharacter : MonoBehaviour
             clampedVelocity.x = Mathf.Clamp(rb2d.velocity.x, -maxSpeed, maxSpeed);
             rb2d.velocity = clampedVelocity;
         }
-        
 
+        UpdateDirectionFacing();
+    }
+
+    private void UpdateDirectionFacing()
+    {
         if (horizontalInput > 0 && !facingRight && canMove)
         {
             Flip();
@@ -156,6 +192,7 @@ public class PlayerCharacter : MonoBehaviour
             Flip();
         }
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("PickUp"))
@@ -164,7 +201,8 @@ public class PlayerCharacter : MonoBehaviour
             Debug.Log("CanDoubleJump?: " + canDoubleJump);
         }
     }
-    public void Death()
+
+    public void Die()
     {
         canMove = false;
         rb2d.velocity = Vector2.zero;
@@ -181,27 +219,6 @@ public class PlayerCharacter : MonoBehaviour
         }
     }
 
-
-    public void Respawn()
-    {
-        PlayerIsRespawning = true;
-        if (currentCheckpoint == null)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-        else
-        {
-            rb2d.velocity = Vector2.zero;
-            transform.position = currentCheckpoint.transform.position;
-        }
-
-        isDead = false;
-        playerAnimator.SetBool("isDead", isDead);
-        //PickUps pickUps = new PickUps();
-        //pickUps.PickUpIsActivated = false;
-        respawnUIImage.enabled = false;
-        canMove = true;
-    }
     public void SetCurrentCheckpoint(Checkpoint newCurrentCheckpoint)
     {
         if (currentCheckpoint != null)

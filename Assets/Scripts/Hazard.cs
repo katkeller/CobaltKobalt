@@ -20,7 +20,7 @@ public class Hazard : MonoBehaviour
             Debug.Log("Player entered Hazard");
             audioSource.Play();
             PlayerCharacter player = collision.GetComponent<PlayerCharacter>();
-            player.Death();
+            player.Die();
         }
         else
         {

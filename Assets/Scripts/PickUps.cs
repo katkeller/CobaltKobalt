@@ -6,46 +6,49 @@ public class PickUps : MonoBehaviour
 {
     private AudioSource audioSource;
     private Animator pickUpAnimator;
-    private bool playerIsRespawning;
+    //private bool playerIsRespawning;
     private PlayerCharacter player;
-
-    public bool PlayerInTrigger { get; set; }
-    public bool PickUpIsActivated { get; set; }
+    private bool PlayerInTrigger;
+    private bool pickUpIsActivated;
+    public bool playerIsRespawning;
 
     private void Start()
     {
-        player = new PlayerCharacter();
-
-        playerIsRespawning = player.PlayerIsRespawning;
         audioSource = GetComponent<AudioSource>();
         pickUpAnimator = GetComponent<Animator>();
     }
     void Update ()
     {
-        if (PlayerInTrigger && Input.GetButtonDown("DoubleJump") && !PickUpIsActivated)
+        if (PlayerInTrigger && Input.GetButtonDown("DoubleJump") && !pickUpIsActivated)
         {
             audioSource.Play();
-            PickUpIsActivated = true;
+            pickUpIsActivated = true;
         }
         
-        if (PickUpIsActivated)
+        if (pickUpIsActivated)
         {
             pickUpAnimator.SetBool("isActivated", true);
         }
-        else if (!PickUpIsActivated)
+        else if (!pickUpIsActivated)
         {
             pickUpAnimator.SetBool("isActivated", false);
         }
 
         if (playerIsRespawning)
         {
-            Debug.Log("pickup is being reset");
+            pickUpIsActivated = false;
         }
         
 	}
+
+    public void PlayerIsRespawing()
+    {
+        playerIsRespawning = true;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && !PickUpIsActivated)
+        if (collision.CompareTag("Player") && !pickUpIsActivated)
         {
             PlayerInTrigger = true;
             pickUpAnimator.SetBool("playerInTrigger", true);
@@ -53,11 +56,10 @@ public class PickUps : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && !PickUpIsActivated)
+        if (collision.CompareTag("Player") && !pickUpIsActivated)
         {
             PlayerInTrigger = false;
             pickUpAnimator.SetBool("playerInTrigger", false);
         }
     }
-
 }
