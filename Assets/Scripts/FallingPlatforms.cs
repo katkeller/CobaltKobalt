@@ -48,6 +48,7 @@ public class FallingPlatforms : MonoBehaviour
     {
         Debug.Log("Platfroms should reset");
         rb2d.isKinematic = true;
+        isTriggered = false;
         gameObject.transform.position = originalPosition;
     }
 }
