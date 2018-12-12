@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class QuitOnClick : MonoBehaviour
 {
-
     public void Quit()
     {
 #if UNITY_EDITOR
