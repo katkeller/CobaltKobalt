@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// This script is attached to a child object on the pick up. It allows the pick up to play two seperate audio clips simultaneously.
+/// </summary>
 public class PickUpAudio : MonoBehaviour
 {
     private AudioSource audioSource;
@@ -16,7 +18,7 @@ public class PickUpAudio : MonoBehaviour
 
     void Update ()
     {
-		if (playerInTrigger && Input.GetButtonDown("DoubleJump"))
+	    if (playerInTrigger && Input.GetButtonDown("DoubleJump"))
         {
             pickUpIsActivated = true;
             audioSource.Stop();
