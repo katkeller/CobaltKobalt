@@ -113,11 +113,6 @@ public class PlayerCharacter : MonoBehaviour
 
         isDead = false;
         playerAnimator.SetBool("isDead", isDead);
-        //FallingPlatforms fallingPlatform = new FallingPlatforms();
-       // GetComponent<FallingPlatforms>().ResetPlatforms();
-        //fallingPlatform.ResetPlatforms();
-        //FallingPlatforms fallingPlatforms = GetComponant<FallingPlatforms>();
-        //fallingPlatforms.ResetPlatforms();
         respawnUIImage.enabled = false;
         canMove = true;
         if (PlayerRespawned != null)
