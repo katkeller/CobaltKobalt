@@ -6,15 +6,13 @@ using UnityEngine.SceneManagement;
 public class Hazard : MonoBehaviour
 {
     [SerializeField]
-    //private float respawnDelay = 5.0f;
-
     private AudioSource audioSource;
-
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("Player"))
@@ -28,6 +26,5 @@ public class Hazard : MonoBehaviour
         {
             Debug.Log("Something other than the player entered hazard");
         }
-        
     }
 }
